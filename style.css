@@ -1,0 +1,200 @@
+:root {
+    --primary-color: #00ffff; /* Cyan néon */
+    --background-color: #0a0a1f; /* Bleu nuit très sombre */
+    --table-bg-color: #1a1a3a;
+    --border-color: #00ffff44;
+    --text-color: #e0e0e0;
+    --glow-color: #00ffff;
+    --success-color: #00ff7f; /* Vert néon */
+    --error-color: #ff4d4d; /* Rouge néon */
+    --warning-color: #ffd700; /* Jaune néon */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    background: var(--table-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 25px var(--glow-color), inset 0 0 15px var(--border-color);
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+    letter-spacing: 3px;
+}
+
+/* Styles des onglets */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-link:hover {
+    color: var(--primary-color);
+}
+
+.tab-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    display: table-cell;
+}
+
+thead th {
+    color: var(--primary-color);
+    font-size: 1.2em;
+    text-transform: uppercase;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--primary-color);
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #2a2a4a;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td .status {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block; /* Correction clé */
+    background-color: #555; /* Couleur par défaut */
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.status[data-status="Running"] .status-indicator {
+    background-color: var(--success-color);
+    box-shadow: 0 0 8px var(--success-color);
+}
+.status[data-status="Running"] { color: var(--success-color); }
+
+.status[data-status="Stopped"] .status-indicator {
+    background-color: var(--error-color);
+    box-shadow: 0 0 8px var(--error-color);
+}
+.status[data-status="Stopped"] { color: var(--error-color); }
+
+.status[data-status="Starting"] .status-indicator {
+    background-color: var(--warning-color);
+    box-shadow: 0 0 8px var(--warning-color);
+    animation: pulse 1.5s infinite;
+}
+.status[data-status="Starting"] { color: var(--warning-color); }
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.actions {
+    text-align: right;
+}
+
+.btn {
+    background: transparent;
+    border: 1px solid;
+    color: var(--text-color);
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.btn-start {
+    border-color: var(--success-color);
+}
+.btn-start:hover {
+    background-color: var(--success-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--success-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
+
+.btn-stop {
+    border-color: var(--error-color);
+}
+.btn-stop:hover {
+    background-color: var(--error-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--error-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+    background-color: transparent;
+    color: var(--text-color);
+}

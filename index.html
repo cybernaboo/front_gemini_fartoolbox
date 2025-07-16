@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Status Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>Services Dashboard</h1>
+
+        <div class="tabs">
+            <button class="tab-link active" data-tab="services">Services</button>
+            <button class="tab-link" data-tab="dataflow">DataFlow Log</button>
+            <button class="tab-link" data-tab="protobuf">Protobuf Reducer</button>
+        </div>
+
+        <div id="services" class="tab-content active">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom du Service</th>
+                        <th>Statut</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>API Gateway</td>
+                        <td><div class="status" data-status="Running"><span class="status-indicator"></span>Running</div></td>
+                        <td class="actions">
+                            <button class="btn btn-start" disabled>Start</button>
+                            <button class="btn btn-stop">Stop</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Data Processor</td>
+                        <td><div class="status" data-status="Stopped"><span class="status-indicator"></span>Stopped</div></td>
+                        <td class="actions">
+                            <button class="btn btn-start">Start</button>
+                            <button class="btn btn-stop" disabled>Stop</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Authentication Service</td>
+                        <td><div class="status" data-status="Running"><span class="status-indicator"></span>Running</div></td>
+                        <td class="actions">
+                            <button class="btn btn-start" disabled>Start</button>
+                            <button class="btn btn-stop">Stop</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Monitoring Agent</td>
+                        <td><div class="status" data-status="Stopped"><span class="status-indicator"></span>Stopped</div></td>
+                        <td class="actions">
+                            <button class="btn btn-start">Start</button>
+                            <button class="btn btn-stop" disabled>Stop</button>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>Logging Pipeline</td>
+                        <td><div class="status" data-status="Stopped"><span class="status-indicator"></span>Stopped</div></td>
+                        <td class="actions">
+                            <button class="btn btn-start">Start</button>
+                            <button class="btn btn-stop" disabled>Stop</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="dataflow" class="tab-content">
+            <h2>DataFlow Log</h2>
+            <p>Contenu pour DataFlow Log...</p>
+        </div>
+
+        <div id="protobuf" class="tab-content">
+            <h2>Protobuf Reducer</h2>
+            <p>Contenu pour Protobuf Reducer...</p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
