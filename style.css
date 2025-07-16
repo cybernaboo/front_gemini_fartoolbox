@@ -78,6 +78,7 @@ h1 {
 
 .tab-content.active {
     display: block;
+    min-height: 400px; /* Hauteur minimale pour un cadre cohérent */
 }
 
 table {
@@ -346,7 +347,8 @@ td .status {
 }
 
 .search-form input[type="text"],
-.search-form input[type="number"] {
+.search-form input[type="number"],
+.search-form select {
     background-color: #0a0a1f;
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -359,7 +361,8 @@ td .status {
 }
 
 .search-form input[type="text"]:focus,
-.search-form input[type="number"]:focus {
+.search-form input[type="number"]:focus,
+.search-form select:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 8px var(--primary-color);
 }

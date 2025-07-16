@@ -49,6 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Gérer le bouton "Générer" de l'onglet Protobuf Reducer
+    const generateProtobufButton = document.querySelector('.btn-generate-protobuf');
+    if (generateProtobufButton) {
+        generateProtobufButton.addEventListener('click', () => {
+            const protobufFile = document.getElementById('protobufFile').value;
+            const filterType = document.getElementById('filterType').value;
+            const filterValue = document.getElementById('filterValue').value;
+
+            console.log('Formulaire Protobuf Reducer soumis:');
+            console.log(`Fichier protobuf: ${protobufFile}`);
+            console.log(`Type filtre: ${filterType}`);
+            console.log(`Valeur filtre: ${filterValue}`);
+
+            // Ici, vous pouvez ajouter la logique pour générer le protobuf réduit
+        });
+    }
+
     function handleColumnAction(action) {
         const checkboxes = document.querySelectorAll(`.action-checkbox[data-action="${action}"]:checked`);
         checkboxes.forEach(checkbox => {
