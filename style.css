@@ -7,6 +7,7 @@
     --glow-color: #00ffff;
     --success-color: #00ff7f; /* Vert néon */
     --error-color: #ff4d4d; /* Rouge néon */
+    --restart-color: #1c05b0; /* Bleu néon */
     --warning-color: #ffd700; /* Jaune néon */
 }
 
@@ -176,7 +177,7 @@ td .status {
 }
 .btn-start:hover {
     background-color: var(--success-color);
-    color: var(--background-color);
+    color: var(--text-color);
     box-shadow: 0 0 15px var(--success-color);
     text-shadow: 0 0 5px var(--background-color);
 }
@@ -191,10 +192,63 @@ td .status {
     text-shadow: 0 0 5px var(--background-color);
 }
 
+.btn-restart {
+    border-color: var(--primary-color);
+}
+.btn-restart:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--primary-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
+
+.btn-restart {
+    border-color: var(--restart-color);
+}
+.btn-restart:hover {
+    background-color: var(--restart-color);
+    color: var(--text-color);
+    box-shadow: 0 0 15px var(--restart-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
+
+
+
 .btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
     box-shadow: none;
     background-color: transparent;
     color: var(--text-color);
+}
+
+.action-col {
+    text-align: center;
+}
+
+.action-col button {
+    display: block;
+    margin: 5px auto 0;
+}
+
+.action-checkbox {
+    width: 20px;
+    height: 20px;
+    display: block; /* Permet de centrer avec margin: auto */
+    margin: 0 auto; /* Centre horizontalement */
+}
+
+.checkbox-start {
+    accent-color: var(--success-color); /* Pour les navigateurs modernes */
+    border-color: var(--success-color);
+}
+
+.checkbox-stop {
+    accent-color: var(--error-color); /* Pour les navigateurs modernes */
+    border-color: var(--error-color);
+}
+
+.checkbox-restart {
+    accent-color: var(--primary-color); /* Pour les navigateurs modernes */
+    border-color: var(--primary-color);
 }

@@ -24,51 +24,59 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Nom du Service</th>
+                        <th>Service</th>
                         <th>Statut</th>
-                        <th class="actions">Actions</th>
+                        <th class="action-col">
+                            <button class="btn btn-start">Start</button>
+                        </th>
+                        <th class="action-col">
+                            <button class="btn btn-stop">Stop</button>
+                        </th>
+                        <th class="action-col">
+                            <button class="btn btn-restart">Restart</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>API Gateway</td>
                         <td><div class="status" data-status="Running"><span class="status-indicator"></span>Running</div></td>
-                        <td class="actions">
-                            <button class="btn btn-start" disabled>Start</button>
-                            <button class="btn btn-stop">Stop</button>
-                        </td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-start" data-action="start"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-stop" data-action="stop"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-restart" data-action="restart"></td>
+                        
                     </tr>
                     <tr>
                         <td>Data Processor</td>
                         <td><div class="status" data-status="Stopped"><span class="status-indicator"></span>Stopped</div></td>
-                        <td class="actions">
-                            <button class="btn btn-start">Start</button>
-                            <button class="btn btn-stop" disabled>Stop</button>
-                        </td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-start" data-action="start"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-stop" data-action="stop"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-restart" data-action="restart"></td>
+                        
                     </tr>
                     <tr>
                         <td>Authentication Service</td>
                         <td><div class="status" data-status="Running"><span class="status-indicator"></span>Running</div></td>
-                        <td class="actions">
-                            <button class="btn btn-start" disabled>Start</button>
-                            <button class="btn btn-stop">Stop</button>
-                        </td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-start" data-action="start"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-stop" data-action="stop"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-restart" data-action="restart"></td>
+                        
                     </tr>
                     <tr>
                         <td>Monitoring Agent</td>
                         <td><div class="status" data-status="Stopped"><span class="status-indicator"></span>Stopped</div></td>
-                        <td class="actions">
-                            <button class="btn btn-start">Start</button>
-                            <button class="btn btn-stop" disabled>Stop</button>
-                        </td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-start" data-action="start"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-stop" data-action="stop"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-restart" data-action="restart"></td>
+                        
                     </tr>
                      <tr>
                         <td>Logging Pipeline</td>
                         <td><div class="status" data-status="Stopped"><span class="status-indicator"></span>Stopped</div></td>
-                        <td class="actions">
-                            <button class="btn btn-start">Start</button>
-                            <button class="btn btn-stop" disabled>Stop</button>
-                        </td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-start" data-action="start"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-stop" data-action="stop"></td>
+                        <td><input type="checkbox" class="action-checkbox checkbox-restart" data-action="restart"></td>
+                        
                     </tr>
                 </tbody>
             </table>
