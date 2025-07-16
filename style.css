@@ -177,7 +177,7 @@ td .status {
 }
 .btn-start:hover {
     background-color: var(--success-color);
-    color: var(--text-color);
+    color: var(--background-color);
     box-shadow: 0 0 15px var(--success-color);
     text-shadow: 0 0 5px var(--background-color);
 }
@@ -192,6 +192,8 @@ td .status {
     text-shadow: 0 0 5px var(--background-color);
 }
 
+
+
 .btn-restart {
     border-color: var(--primary-color);
 }
@@ -202,17 +204,83 @@ td .status {
     text-shadow: 0 0 5px var(--background-color);
 }
 
-.btn-restart {
-    border-color: var(--restart-color);
+
+
+.global-actions {
+    display: grid; /* Utilise Grid pour l'alignement des colonnes */
+    grid-template-columns: auto auto 1fr 1fr 1fr; /* 5 colonnes: Service, Statut, Start, Stop, Restart */
+    gap: 15px; /* Espacement entre les éléments de la grille */
+    margin-bottom: 20px;
+    padding: 15px 20px; /* Correspond au padding horizontal des cellules du tableau */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #1a1a3a;
+    box-shadow: inset 0 0 10px var(--border-color);
 }
-.btn-restart:hover {
-    background-color: var(--restart-color);
-    color: var(--text-color);
-    box-shadow: 0 0 15px var(--restart-color);
+
+.global-actions .btn-get-status {
+    grid-column: 1; /* Place dans la première colonne (Service) */
+    justify-self: start; /* Aligne au début de la cellule */
+}
+
+.global-actions .btn-start-all {
+    grid-column: 3; /* Place dans la troisième colonne (Start) */
+    justify-self: center; /* Centre dans la cellule */
+}
+
+.global-actions .btn-stop-all {
+    grid-column: 4; /* Place dans la quatrième colonne (Stop) */
+    justify-self: center; /* Centre dans la cellule */
+}
+
+.global-actions .btn-restart-all {
+    grid-column: 5; /* Place dans la cinquième colonne (Restart) */
+    justify-self: center; /* Centre dans la cellule */
+}
+
+.global-actions .btn {
+    width: auto; /* Permet aux boutons de prendre leur largeur naturelle */
+}
+
+.btn-get-status {
+    border-color: var(--warning-color);
+}
+.btn-get-status:hover {
+    background-color: var(--warning-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--warning-color);
     text-shadow: 0 0 5px var(--background-color);
 }
 
+.btn-start-all {
+    border-color: var(--success-color);
+}
+.btn-start-all:hover {
+    background-color: var(--success-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--success-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
 
+.btn-stop-all {
+    border-color: var(--error-color);
+}
+.btn-stop-all:hover {
+    background-color: var(--error-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--error-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
+
+.btn-restart-all {
+    border-color: var(--primary-color);
+}
+.btn-restart-all:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--primary-color);
+    text-shadow: 0 0 5px var(--background-color);
+}
 
 .btn:disabled {
     opacity: 0.4;

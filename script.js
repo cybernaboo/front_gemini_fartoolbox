@@ -20,15 +20,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Gérer les actions de masse
-    document.querySelector('.btn-start').addEventListener('click', () => handleMassAction('start'));
-    document.querySelector('.btn-stop').addEventListener('click', () => handleMassAction('stop'));
-    document.querySelector('.btn-restart').addEventListener('click', () => handleMassAction('restart'));
+    document.querySelector('.btn-start').addEventListener('click', () => handleColumnAction('start'));
+    document.querySelector('.btn-stop').addEventListener('click', () => handleColumnAction('stop'));
+    document.querySelector('.btn-restart').addEventListener('click', () => handleColumnAction('restart'));
 
-    function handleMassAction(action) {
+    // Gérer les actions globales
+    document.querySelector('.btn-get-status').addEventListener('click', () => handleGlobalAction('get-status'));
+    document.querySelector('.btn-start-all').addEventListener('click', () => handleGlobalAction('start'));
+    document.querySelector('.btn-stop-all').addEventListener('click', () => handleGlobalAction('stop'));
+    document.querySelector('.btn-restart-all').addEventListener('click', () => handleGlobalAction('restart'));
+
+    function handleColumnAction(action) {
         const checkboxes = document.querySelectorAll(`.action-checkbox[data-action="${action}"]:checked`);
         checkboxes.forEach(checkbox => {
             const row = checkbox.closest('tr');
             if (action === 'start' || action === 'restart') {
+                simulateStarting(row, action);
+            } else {
+                updateServiceStatus(row, getActionStatus(action));
+            }
+            checkbox.checked = false; // Décocher après l'action
+        });
+    }
+
+    function handleGlobalAction(action) {
+        const allRows = serviceTable.querySelectorAll('tbody tr');
+        allRows.forEach(row => {
+            if (action === 'get-status') {
+                // Simuler un statut aléatoire pour Get Status
+                const randomStatus = Math.random() < 0.5 ? 'Running' : 'Stopped';
+                updateServiceStatus(row, randomStatus);
+            } else if (action === 'start' || action === 'restart') {
                 simulateStarting(row, action);
             } else {
                 updateServiceStatus(row, getActionStatus(action));
