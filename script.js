@@ -30,6 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.btn-stop-all').addEventListener('click', () => handleGlobalAction('stop'));
     document.querySelector('.btn-restart-all').addEventListener('click', () => handleGlobalAction('restart'));
 
+    // Gérer le bouton "Générer" de l'onglet DataFlow Log
+    const generateButton = document.querySelector('.btn-generate');
+    if (generateButton) {
+        generateButton.addEventListener('click', () => {
+            const dateId = document.getElementById('dateId').value;
+            const inputId = document.getElementById('inputId').value;
+            const dataflow = document.getElementById('dataflow').value;
+            const nbLignes = document.getElementById('nbLignes').value;
+
+            console.log('Formulaire DataFlow Log soumis:');
+            console.log(`DateId: ${dateId}`);
+            console.log(`InputId: ${inputId}`);
+            console.log(`Dataflow: ${dataflow}`);
+            console.log(`Nb de lignes: ${nbLignes}`);
+
+            // Ici, vous pouvez ajouter la logique pour générer le log
+        });
+    }
+
     function handleColumnAction(action) {
         const checkboxes = document.querySelectorAll(`.action-checkbox[data-action="${action}"]:checked`);
         checkboxes.forEach(checkbox => {

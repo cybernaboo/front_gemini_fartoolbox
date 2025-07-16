@@ -90,7 +90,25 @@
 
         <div id="dataflow" class="tab-content">
             <h2>DataFlow Log</h2>
-            <p>Contenu pour DataFlow Log...</p>
+            <div class="search-form">
+                <div class="form-group">
+                    <label for="dateId">DateId:</label>
+                    <input type="text" id="dateId" name="dateId">
+                </div>
+                <div class="form-group">
+                    <label for="inputId">InputId:</label>
+                    <input type="text" id="inputId" name="inputId">
+                </div>
+                <div class="form-group">
+                    <label for="dataflow">Dataflow:</label>
+                    <input type="text" id="dataflow" name="dataflow">
+                </div>
+                <div class="form-group">
+                    <label for="nbLignes">Nb de lignes:</label>
+                    <input type="number" id="nbLignes" name="nbLignes">
+                </div>
+                <button class="btn btn-generate">Générer</button>
+            </div>
         </div>
 
         <div id="protobuf" class="tab-content">
