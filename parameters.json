@@ -1,0 +1,12 @@
+{
+    "Port": 5000,
+    "Platforms": {
+        "Platform": [
+            "Production",
+            "Staging",
+            "Development-West",
+            "Development-East"
+        ],
+        "Default platform": "Production"
+    }
+}
