@@ -9,6 +9,7 @@
     --error-color: #ff4d4d; /* Rouge néon */
     --restart-color: #1c05b0; /* Bleu néon */
     --warning-color: #ffd700; /* Jaune néon */
+    --await-bg-color: #f47c04; /* Orange pour l'écran d'attente */
 }
 
 body {
@@ -22,6 +23,10 @@ body {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.await {
+    background-color: var(--await-bg-color);
 }
 
 .dashboard-container {
