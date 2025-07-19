@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabsContainer = document.querySelector('.tabs');
     const serviceTable = document.querySelector('table');
 
-    // Gérer le changement d'onglet
+    // Gérer le changement d'onglet !
     tabsContainer.addEventListener('click', (event) => {
         const clickedTab = event.target;
         if (!clickedTab.matches('.tab-link')) return;
