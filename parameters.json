@@ -2,11 +2,10 @@
     "Port": 5000,
     "Platforms": {
         "Platform": [
-            "Production",
-            "Staging",
-            "Development-West",
-            "Development-East"
+            "DEV_ABA",
+            "DEV_NAI",
+            "DEV_ASE"
         ],
-        "Default platform": "Production"
+        "Default platform": "DEV_NAI"
     }
 }
