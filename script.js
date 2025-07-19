@@ -19,52 +19,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Gérer les actions de masse
-    document.querySelector('.btn-start').addEventListener('click', () => handleColumnAction('start'));
-    document.querySelector('.btn-stop').addEventListener('click', () => handleColumnAction('stop'));
-    document.querySelector('.btn-restart').addEventListener('click', () => handleColumnAction('restart'));
+    function AddListeners() {
+        // Gérer les actions de masse
+        document.querySelector('.btn-start').addEventListener('click', () => handleColumnAction('start'));
+        document.querySelector('.btn-stop').addEventListener('click', () => handleColumnAction('stop'));
+        document.querySelector('.btn-restart').addEventListener('click', () => handleColumnAction('restart'));
 
-    // Gérer les actions globales
-    document.querySelector('.btn-get-status').addEventListener('click', () => handleGlobalAction('get-status'));
-    document.querySelector('.btn-start-all').addEventListener('click', () => handleGlobalAction('start'));
-    document.querySelector('.btn-stop-all').addEventListener('click', () => handleGlobalAction('stop'));
-    document.querySelector('.btn-restart-all').addEventListener('click', () => handleGlobalAction('restart'));
+        // Gérer les actions globales
+        document.querySelector('.btn-get-status').addEventListener('click', () => handleGlobalAction('get-status'));
+        document.querySelector('.btn-start-all').addEventListener('click', () => handleGlobalAction('start'));
+        document.querySelector('.btn-stop-all').addEventListener('click', () => handleGlobalAction('stop'));
+        document.querySelector('.btn-restart-all').addEventListener('click', () => handleGlobalAction('restart'));
 
-    // Gérer le bouton "Générer" de l'onglet DataFlow Log
-    const generateButton = document.querySelector('.btn-generate');
-    if (generateButton) {
-        generateButton.addEventListener('click', () => {
-            const dateId = document.getElementById('dateId').value;
-            const inputId = document.getElementById('inputId').value;
-            const dataflow = document.getElementById('dataflow').value;
-            const nbLignes = document.getElementById('nbLignes').value;
 
-            console.log('Formulaire DataFlow Log soumis:');
-            console.log(`DateId: ${dateId}`);
-            console.log(`InputId: ${inputId}`);
-            console.log(`Dataflow: ${dataflow}`);
-            console.log(`Nb de lignes: ${nbLignes}`);
-
-            // Ici, vous pouvez ajouter la logique pour générer le log
-        });
+        const generateButton = document.querySelector('.btn-generate-dataflowextract');
+        if (generateButton) {
+            console.log('DataFlowExtractPushButton initialized');
+            generateButton.addEventListener('click', () => {
+                DataFlowExtractPushButton();
+            });
+        }
     }
 
-    // Gérer le bouton "Générer" de l'onglet Protobuf Reducer
-    const generateProtobufButton = document.querySelector('.btn-generate-protobuf');
-    if (generateProtobufButton) {
-        generateProtobufButton.addEventListener('click', () => {
-            const protobufFile = document.getElementById('protobufFile').value;
-            const filterType = document.getElementById('filterType').value;
-            const filterValue = document.getElementById('filterValue').value;
-
-            console.log('Formulaire Protobuf Reducer soumis:');
-            console.log(`Fichier protobuf: ${protobufFile}`);
-            console.log(`Type filtre: ${filterType}`);
-            console.log(`Valeur filtre: ${filterValue}`);
-
-            // Ici, vous pouvez ajouter la logique pour générer le protobuf réduit
-        });
-    }
+    AddListeners();
 
     function handleColumnAction(action) {
         const checkboxes = document.querySelectorAll(`.action-checkbox[data-action="${action}"]:checked`);
