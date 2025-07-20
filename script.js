@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const platform = document.querySelector(".platform").value;
     if (action == "get-status") { serviceHandleGetStatus(platform); }
     else {
-      serviceGlobalAction(action).then((result) => {
+      serviceGlobalAction(action, platform).then((result) => {
         if (result[0] == 'ok') {
           console.log(`Global action '${action}' executed successfully.`);
         }

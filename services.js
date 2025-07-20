@@ -39,7 +39,6 @@ export async function serviceGlobalAction(action, platform) {
   return (['ok', 'Action executed successfully : ' + action]); // Simulate successful action response
 }
 
-
 export async function serviceAction(serviceList, action, platform) {
   // mock return status from API Fetch
   if (!Array.isArray(serviceList) || serviceList.length === 0) {
