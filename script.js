@@ -1,3 +1,12 @@
+// import all from services.js
+import {
+  dataFlowLogExtract,
+  ProtobufExtract,
+  getServiceList,
+  serviceGlobalAction,
+  serviceAction
+} from './services.js';
+
 document.addEventListener("DOMContentLoaded", () => {
   const tabsContainer = document.querySelector(".tabs");
   const serviceTable = document.querySelector("table");
@@ -51,37 +60,46 @@ document.addEventListener("DOMContentLoaded", () => {
     // Gérer les actions de masse
     document
       .querySelector(".btn-start")
-      .addEventListener("click", () => handleColumnAction("start"));
+      .addEventListener("click", () => serviceHandleColumnAction("start"));
     document
       .querySelector(".btn-stop")
-      .addEventListener("click", () => handleColumnAction("stop"));
+      .addEventListener("click", () => serviceHandleColumnAction("stop"));
     document
       .querySelector(".btn-restart")
-      .addEventListener("click", () => handleColumnAction("restart"));
+      .addEventListener("click", () => serviceHandleColumnAction("restart"));
 
     // Gérer les actions globales
     document
       .querySelector(".btn-get-status")
-      .addEventListener("click", () => handleGlobalAction("get-status"));
+      .addEventListener("click", () => serviceHandleGlobalAction("get-status"));
     document
       .querySelector(".btn-start-all")
-      .addEventListener("click", () => handleGlobalAction("start"));
+      .addEventListener("click", () => serviceHandleGlobalAction("start"));
     document
       .querySelector(".btn-stop-all")
-      .addEventListener("click", () => handleGlobalAction("stop"));
+      .addEventListener("click", () => serviceHandleGlobalAction("stop"));
     document
       .querySelector(".btn-restart-all")
-      .addEventListener("click", () => handleGlobalAction("restart"));
+      .addEventListener("click", () => serviceHandleGlobalAction("restart"));
 
-    const generateButton = document.querySelector(
-      ".btn-generate-dataflowextract"
+    const generateDataflowExtractButton = document.querySelector(
+      "#generateDataflowExtractButton"
     );
-    if (generateButton) {
-      console.log("DataFlowExtractPushButton initialized");
-      generateButton.addEventListener("click", async () => {
-        generateButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
-        await DataFlowExtractPushButton();
-        generateButton.style.backgroundColor = ""; // Reset to initial color
+    if (generateDataflowExtractButton) {
+      console.log("dataFlowLogExtract initialized");
+      generateDataflowExtractButton.addEventListener("click", async () => {
+        handleDataFlowLogExtract();
+        generateDataflowExtractButton.style.backgroundColor = ""; // Reset to initial color
+      });
+    }
+
+    const generateProtobufExtractButton = document.querySelector(
+      "#generateProtobufButton"
+    );
+    if (generateProtobufExtractButton) {
+      console.log("ProtobufExtractButton initialized");
+      generateProtobufExtractButton.addEventListener("click", async () => {
+        handleProtobufExtract();
       });
     }
   }
@@ -89,61 +107,142 @@ document.addEventListener("DOMContentLoaded", () => {
   initialize();
   AddListeners();
 
-  function handleColumnAction(action) {
-    const checkboxes = document.querySelectorAll(
-      `.action-checkbox[data-action="${action}"]:checked`
+  function handleDataFlowLogExtract() {
+    const dateId = document.querySelector("#dateId").value;
+    const inputId = document.querySelector("#inputId").value;
+    const dataflow = document.querySelector("#dataflow").value;
+    const nbLignes = document.querySelector("#nbLignes").value;
+    const generateDataflowExtractButton = document.querySelector(
+      "#generateDataflowExtractButton"
     );
-    checkboxes.forEach((checkbox) => {
-      const row = checkbox.closest("tr");
-      if (action === "start" || action === "restart") {
-        simulateStarting(row, action);
+    if (!generateDataflowExtractButton)
+      alert("Generate DataFlow Extract button not found.");
+    /*
+        if (!dateId || !inputId || !dataflow || !nbLignes) {
+          alert("Please fill in all fields for DataFlow extraction.");
+          return;
+        }
+        */
+    generateDataflowExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
+    dataFlowLogExtract(dateId, inputId, dataflow, nbLignes)
+      .then((result) => {
+        if (result.status === 'ok') {
+          console.log("DataFlow extraction successful:", result.message);
+        } else {
+          alert(`Error during DataFlow extraction: ${result.message}`);
+          console.error("Error during DataFlow extraction:", result.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error during DataFlow extraction:", error);
+        alert(`Error during DataFlow extraction: ${error.message}`);
+      })
+      .finally(() => {
+        generateDataflowExtractButton.style.backgroundColor = ""; // Reset to initial color
+      });
+  }
+
+  function handleProtobufExtract() {
+    //queryselector using field ids
+    const filename = document.querySelector("#protobufFilename").value;
+    const filterType = document.querySelector("#filterType").value;
+    const filterValue = document.querySelector("#filterValue").value;
+    const generateProtobufExtractButton = document.querySelector("#generateProtobufButton");
+    if (!filename || !filterType || !filterValue) {
+      alert("Please fill in all fields for Protobuf extraction.");
+      return;
+    }
+    generateProtobufExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
+    ProtobufExtract().then((result) => {
+      if (result.status === 'ok') {
+        console.log("Protobuf extraction successful:", result.message);
       } else {
-        updateServiceStatus(row, getActionStatus(action));
+        alert(`Error during Protobuf extraction: ${result.message}`);
+        console.error("Error during Protobuf extraction:", result.message);
       }
-      checkbox.checked = false; // Décocher après l'action
+    }).catch((error) => {
+      console.error("Error during Protobuf extraction:", error);
+      alert(`Error during Protobuf extraction: ${error.message}`);
+    }).finally(() => {
+      generateProtobufExtractButton.style.backgroundColor = ""; // Reset to initial color
     });
   }
 
-  function handleGlobalAction(action) {
-    const allRows = serviceTable.querySelectorAll("tbody tr");
-    allRows.forEach((row) => {
-      if (action === "get-status") {
-        // Simuler un statut aléatoire pour Get Status
-        const randomStatus = Math.random() < 0.5 ? "Running" : "Stopped";
-        updateServiceStatus(row, randomStatus);
-      } else if (action === "start" || action === "restart") {
-        simulateStarting(row, action);
+  function serviceHandleColumnAction(action) {
+    const serviceList = getServiceDataFromTable();
+    const platform = document.querySelector(".platform").value;
+    serviceAction(serviceList, action, platform).then((result) => {
+      if (result[0] == 'ok') {
+        console.log(`Action '${action}' executed successfully on selected services.`);
       } else {
-        updateServiceStatus(row, getActionStatus(action));
+        alert(`Error executing action '${action}': ${result[1]}`);
+        console.error(`Error executing action '${action}':`, result[1]);
       }
     });
+    serviceHandleGetStatus(platform);
   }
 
-  function simulateStarting(row, action) {
-    const statusDiv = row.querySelector(".status");
-    statusDiv.dataset.status = "Starting";
-    statusDiv.innerHTML = `<span class="status-indicator"></span>Starting...`;
-
-    setTimeout(() => {
-      updateServiceStatus(row, getActionStatus(action));
-    }, 2000); // Simule un délai de 2 secondes
-  }
-
-  function getActionStatus(action) {
-    switch (action) {
-      case "start":
-      case "restart":
-        return "Running";
-      case "stop":
-        return "Stopped";
-      default:
-        return "Unknown";
+  function serviceHandleGlobalAction(action) {
+    const platform = document.querySelector(".platform").value;
+    if (action == "get-status") { serviceHandleGetStatus(platform); }
+    else {
+      serviceGlobalAction(action).then((result) => {
+        if (result[0] == 'ok') {
+          console.log(`Global action '${action}' executed successfully.`);
+        }
+        else {
+          alert(`Error executing global action '${action}' : ${result[1]}`);
+          console.error(`Error executing global action '${action}': ${result[1]}`);
+        }
+      }).catch((error) => {
+        console.error(`Error during global action '${action}':`, error);
+      }
+      );
+      serviceHandleGetStatus(platform);
     }
   }
 
-  function updateServiceStatus(row, newStatus) {
-    const statusDiv = row.querySelector(".status");
-    statusDiv.dataset.status = newStatus;
-    statusDiv.innerHTML = `<span class="status-indicator"></span>${newStatus}`;
+  function getServiceDataFromTable() {
+    const serviceList = [];
+    const rows = serviceTable.querySelectorAll("tbody tr");
+    rows.forEach((row) => {
+      const name = row.querySelector("td:first-child").textContent.trim();
+      serviceList.push({ name });
+    });
+    return serviceList;
+  }
+
+  function serviceHandleGetStatus() {
+    const platform = document.querySelector(".platform").value;
+    console.log(`Fetching service status for platform: ${platform}`);
+    getServiceList(platform).then((serviceList) => {
+      populateServiceTable(serviceList);
+      console.log("Service status fetched and table populated.");
+    }).catch((error) => {
+      console.error("Error fetching service status:", error);
+    });
+  }
+
+  function populateServiceTable(serviceList) {
+    const tbody = serviceTable.querySelector("tbody");
+    tbody.innerHTML = ""; // Clear existing rows
+    serviceList.forEach((service) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${service.name}</td>
+        <td class="status" data-status="${service.status}">
+          <span class="status-indicator"></span>${service.status}
+        </td>
+        <td>          <input type="checkbox" class="action-checkbox checkbox-start" data-action="start" />
+        </td>
+        <td>
+          <input type="checkbox" class="action-checkbox checkbox-stop" data-action="stop" />
+        </td>
+        <td>
+          <input type="checkbox" class="action-checkbox checkbox-restart" data-action="restart" />
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
   }
 });

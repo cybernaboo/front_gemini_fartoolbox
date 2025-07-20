@@ -53,153 +53,7 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>API Gateway</td>
-              <td>
-                <div class="status" data-status="Running">
-                  <span class="status-indicator"></span>Running
-                </div>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-start"
-                  data-action="start"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-stop"
-                  data-action="stop"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-restart"
-                  data-action="restart"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Data Processor</td>
-              <td>
-                <div class="status" data-status="Stopped">
-                  <span class="status-indicator"></span>Stopped
-                </div>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-start"
-                  data-action="start"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-stop"
-                  data-action="stop"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-restart"
-                  data-action="restart"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Authentication Service</td>
-              <td>
-                <div class="status" data-status="Running">
-                  <span class="status-indicator"></span>Running
-                </div>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-start"
-                  data-action="start"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-stop"
-                  data-action="stop"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-restart"
-                  data-action="restart"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Monitoring Agent</td>
-              <td>
-                <div class="status" data-status="Stopped">
-                  <span class="status-indicator"></span>Stopped
-                </div>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-start"
-                  data-action="start"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-stop"
-                  data-action="stop"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-restart"
-                  data-action="restart"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Logging Pipeline</td>
-              <td>
-                <div class="status" data-status="Stopped">
-                  <span class="status-indicator"></span>Stopped
-                </div>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-start"
-                  data-action="start"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-stop"
-                  data-action="stop"
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  class="action-checkbox checkbox-restart"
-                  data-action="restart"
-                />
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
 
@@ -222,7 +76,9 @@
             <label for="nbLignes">Nb de lignes:</label>
             <input type="number" id="nbLignes" name="nbLignes" />
           </div>
-          <button class="btn btn-generate-dataflowextract">Générer</button>
+          <button class="btn" id="generateDataflowExtractButton">
+            Generate
+          </button>
         </div>
       </div>
 
@@ -230,26 +86,26 @@
         <h2>Protobuf Reducer</h2>
         <div class="search-form">
           <div class="form-group">
-            <label for="protobufFile">Fichier protobuf:</label>
-            <input type="text" id="protobufFile" name="protobufFile" />
+            <label for="protobufFilename">Protobuf filename :</label>
+            <input type="text" id="protobufFilename" name="protobufFilename" />
           </div>
           <div class="form-group">
-            <label for="filterType">Type filtre:</label>
+            <label for="filterType">Filter type :</label>
             <select id="filterType" name="filterType">
               <option value="portfolio">portfolio</option>
               <option value="gop">gop</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="filterValue">Valeur filtre:</label>
+            <label for="filterValue">Filter value :</label>
             <input type="text" id="filterValue" name="filterValue" />
           </div>
-          <button class="btn btn-generate-protobuf">Générer</button>
+          <button class="btn" id="generateProtobufButton">Generate</button>
         </div>
       </div>
     </div>
 
-    <script src="services.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="services.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
