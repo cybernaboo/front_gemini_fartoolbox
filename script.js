@@ -7,10 +7,49 @@ import {
   serviceAction
 } from './services.js';
 
-let apiport;
+let apiPort;
+fetchParameters(); // Fetch API port from parameters.json
+export { apiPort }; // Export apiPort for use in other modules
+
 let platformList = [];
 let defaultPlatform = "";
 
+async function fetchParameters() {
+  try {
+    const response = await fetch('parameters.json');
+    const data = await response.json();
+    apiPort = data.Port;
+    platformList = data.Platforms.Platform || [];
+    defaultPlatform = data.Platforms["Default platform"] || "";
+    populateDropdown(); // Populate dropdowns with fetched parameters
+    console.log("Parameters fetched:", { apiPort, platformList, defaultPlatform });
+  } catch (error) {
+    console.error("Error fetching API port:", error);
+  }
+}
+
+
+function populateDropdown() {
+  // feed dataflowLogExtractPlatform & servicePlatform dropdowns
+  const servicePlatformDropdown = document.querySelector("#servicePlatform");
+  const dataflowLogExtractPlatformDropdown = document.querySelector("#dataflowLogExtractPlatform");
+  dataflowLogExtractPlatformDropdown.innerHTML = ""; // Clear existing options
+  servicePlatformDropdown.innerHTML = ""; // Clear existing options
+  //    if (!servicePlatformDropdown || !dataflowLogExtractPlatformDropdown) {
+  platformList.forEach((platform) => {
+    const option = document.createElement("option");
+    option.value = platform;
+    option.textContent = platform;
+    if (platform === defaultPlatform) {
+      option.selected = true; // Set default platform as selected
+    }
+    servicePlatformDropdown.appendChild(option);
+    const option2 = option.cloneNode(true);
+    if (option.selected)
+      option2.selected = true;
+    dataflowLogExtractPlatformDropdown.appendChild(option2);
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const tabsContainer = document.querySelector(".tabs");
@@ -35,45 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  async function fetchParameters() {
-    try {
-      const response = await fetch('parameters.json');
-      const data = await response.json();
-      apiport = data.Port;
-      platformList = data.Platforms.Platform || [];
-      defaultPlatform = data.Platforms["Default platform"] || "";
-    } catch (error) {
-      console.error("Error fetching parameters:", error);
-    }
-  }
-
-  function populateDropdown() {
-    // feed dataflowLogExtractPlatform & servicePlatform dropdowns
-    const servicePlatformDropdown = document.querySelector("#servicePlatform");
-    const dataflowLogExtractPlatformDropdown = document.querySelector("#dataflowLogExtractPlatform");
-    dataflowLogExtractPlatformDropdown.innerHTML = ""; // Clear existing options
-    servicePlatformDropdown.innerHTML = ""; // Clear existing options
-    //    if (!servicePlatformDropdown || !dataflowLogExtractPlatformDropdown) {
-    platformList.forEach((platform) => {
-      const option = document.createElement("option");
-      option.value = platform;
-      option.textContent = platform;
-      if (platform === defaultPlatform) {
-        option.selected = true; // Set default platform as selected
-      }
-      servicePlatformDropdown.appendChild(option);
-      const option2 = option.cloneNode(true);
-      if (option.selected)
-        option2.selected = true;
-      dataflowLogExtractPlatformDropdown.appendChild(option2);
-    });
-    //    }
-  }
-
   function initialize() {
-    fetchParameters().then(() => {
-      populateDropdown();
-    })
+    populateDropdown();
   };
 
   function AddListeners() {
@@ -236,11 +238,17 @@ document.addEventListener("DOMContentLoaded", () => {
   function serviceHandleGetStatus() {
     const platform = document.querySelector(".platform").value;
     console.log(`Fetching service status for platform: ${platform}`);
+    // put getstatus button background color to orange
+    const getStatusButton = document.querySelector(".btn-get-status");
+    getStatusButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
+    // Fetch service status and populate the table
     getServiceList(platform).then((serviceList) => {
       populateServiceTable(serviceList);
       console.log("Service status fetched and table populated.");
     }).catch((error) => {
       console.error("Error fetching service status:", error);
+    }).finally(() => {
+      getStatusButton.style.backgroundColor = ""; // Reset to initial color
     });
   }
 

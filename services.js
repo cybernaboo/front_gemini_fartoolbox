@@ -1,3 +1,5 @@
+import { apiPort } from "./script.js";
+
 export async function dataFlowLogExtract(platform, dateId, inputId, dataflow, nbLignes) {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log("DataFlow Extract called with parameters:");
@@ -21,6 +23,8 @@ export async function ProtobufExtract(filename, filterType, filterValue) {
 }
 
 export async function getServiceList(platform) {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log(`Fetching service list for platform & apiPort: ${platform} & ${apiPort}`);
   return [
     { name: "FAR Gateway", status: "Running" },
     { name: "Data Processor", status: "Stopped" },

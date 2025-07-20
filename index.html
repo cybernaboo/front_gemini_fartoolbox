@@ -11,13 +11,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.png" type="image/png" />
   </head>
   <body>
     <div class="dashboard-container">
       <h1>FAR Toolbox</h1>
       <div class="tabs">
         <button class="tab-link active" data-tab="services">Services</button>
-        <button class="tab-link" data-tab="dataflow">DataFlow Log</button>
+        <button class="tab-link" data-tab="dataflowLogExtract">
+          DataFlow Log
+        </button>
         <button class="tab-link" data-tab="protobuf">Protobuf Reducer</button>
       </div>
 
@@ -45,7 +48,7 @@
           <thead>
             <tr>
               <th>Service</th>
-              <th>Statut</th>
+              <th>Status</th>
               <th class="action-col">
                 <button class="btn btn-start">Start</button>
               </th>
@@ -61,7 +64,7 @@
         </table>
       </div>
 
-      <div id="dataflow" class="tab-content">
+      <div id="dataflowLogExtract" class="tab-content">
         <h2>DataFlow Log Extract</h2>
         <div class="search-form">
           <div class="form-group">
