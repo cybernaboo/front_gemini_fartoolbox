@@ -35,6 +35,10 @@ export async function getServiceList(platform) {
 }
 
 export async function serviceGlobalAction(action, platform) {
+  if (action !== 'All_Service_Start' && action !== 'All_Service_Stop' && action !== 'All_Service_Restart') {
+    console.error("Action or platform is not specified.");
+    return (['ko', 'Action or platform is not specified.']);
+  }
   console.log(`Executing global action: ${action} on platform: ${platform}`);
   return (['ok', 'Action executed successfully : ' + action]); // Simulate successful action response
 }
