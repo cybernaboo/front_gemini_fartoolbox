@@ -111,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("dataFlowLogExtract initialized");
       generateDataflowExtractButton.addEventListener("click", async () => {
         handleDataFlowLogExtract();
-        generateDataflowExtractButton.style.backgroundColor = ""; // Reset to initial color
       });
     }
 
