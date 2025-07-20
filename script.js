@@ -96,13 +96,13 @@ document.addEventListener("DOMContentLoaded", () => {
       .addEventListener("click", () => serviceHandleGlobalAction("get-status"));
     document
       .querySelector(".btn-start-all")
-      .addEventListener("click", () => serviceHandleGlobalAction("start"));
+      .addEventListener("click", () => serviceHandleGlobalAction("All_Services_Start"));
     document
       .querySelector(".btn-stop-all")
-      .addEventListener("click", () => serviceHandleGlobalAction("stop"));
+      .addEventListener("click", () => serviceHandleGlobalAction("All_Services_Stop"));
     document
       .querySelector(".btn-restart-all")
-      .addEventListener("click", () => serviceHandleGlobalAction("restart"));
+      .addEventListener("click", () => serviceHandleGlobalAction("All_Services_Restart"));
 
     const generateDataflowExtractButton = document.querySelector(
       "#generateDataflowExtractButton"

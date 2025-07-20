@@ -35,13 +35,8 @@ export async function getServiceList(platform) {
 }
 
 export async function serviceGlobalAction(action, platform) {
-  // mock return status from API Fetch
-  if (action !== "start" && action !== "stop" && action !== "restart") {
-    console.error("Invalid action specified. Use 'start', 'stop', or 'restart'.");
-    return (['ko', 'Invalid action specified. Use "start", "stop", or "restart".']);
-  }
   console.log(`Executing global action: ${action} on platform: ${platform}`);
-  return (['ok', 'Action executed successfully.']); // Simulate successful action response
+  return (['ok', 'Action executed successfully : ' + action]); // Simulate successful action response
 }
 
 
