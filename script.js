@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function serviceHandleGlobalAction(action) {
-    const platform = document.querySelector(".platform").value;
+    const platform = document.querySelector("#servicePlatform").value;
     if (action == "get-status") { serviceHandleGetStatus(platform); }
     else {
       serviceGlobalAction(action, platform).then((result) => {
