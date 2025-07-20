@@ -21,6 +21,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  function initialize() {
+    console.log("Populating platform dropdown...");
+    const platform = document.querySelector(".platform");
+    if (platform) {
+      fetch("parameters.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const platforms = data.Platforms.Platform || [];
+          const defaultPlatform = data.Platforms["Default platform"] || "";
+
+          platforms.forEach((plat) => {
+            const option = document.createElement("option");
+            option.value = plat;
+            option.textContent = plat;
+            platform.appendChild(option);
+          });
+
+          // Set default platform
+          if (defaultPlatform) {
+            platform.value = defaultPlatform;
+          }
+        })
+        .catch((error) => console.error("Error loading parameters:", error));
+    }
+  }
+
   function AddListeners() {
     // Gérer les actions de masse
     document
@@ -60,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  initialize();
   AddListeners();
 
   function handleColumnAction(action) {
