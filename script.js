@@ -219,8 +219,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }).catch((error) => {
         console.error(`Error during global action '${action}':`, error);
       }
-      );
-      serviceHandleGetStatus(platform);
+      ).finally(() => {
+        serviceHandleGetStatus(platform);
+      });
     }
   }
 
