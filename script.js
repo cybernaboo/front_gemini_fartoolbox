@@ -96,13 +96,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .addEventListener("click", () => serviceHandleGlobalAction("get-status"));
     document
       .querySelector(".btn-start-all")
-      .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Start"));
+      .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Start", "btn-start-all"));
     document
       .querySelector(".btn-stop-all")
-      .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Stop"));
+      .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Stop", "btn-stop-all"));
     document
       .querySelector(".btn-restart-all")
-      .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Restart"));
+      .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Restart", "btn-restart-all"
+      ));
 
     const generateDataflowExtractButton = document.querySelector(
       "#generateDataflowExtractButton"
@@ -204,10 +205,17 @@ document.addEventListener("DOMContentLoaded", () => {
     serviceHandleGetStatus(platform);
   }
 
-  function serviceHandleGlobalAction(action) {
+  function serviceHandleGlobalAction(action, button) {
     const platform = document.querySelector("#servicePlatform").value;
     if (action == "get-status") { serviceHandleGetStatus(platform); }
     else {
+      // put global action button background color to orange
+      const globalActionButton = document.querySelector(`.${button}`);
+      if (!globalActionButton) {
+        alert(`Global action button '${button}' not found.`);
+        return;
+      }
+      globalActionButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
       serviceGlobalAction(action, platform).then((result) => {
         if (result[0] == 'ok') {
           console.log(`Global action '${action}' executed successfully.`);
@@ -220,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error(`Error during global action '${action}':`, error);
       }
       ).finally(() => {
+        globalActionButton.style.backgroundColor = ""; // Reset to initial color
         serviceHandleGetStatus(platform);
       });
     }

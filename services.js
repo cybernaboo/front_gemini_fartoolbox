@@ -35,6 +35,8 @@ export async function getServiceList(platform) {
 }
 
 export async function serviceGlobalAction(action, platform) {
+  // setimeout to simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 1000));
   if (action !== 'All_Service_Start' && action !== 'All_Service_Stop' && action !== 'All_Service_Restart') {
     console.error("Action or platform is not specified.");
     return (['ko', 'Action or platform is not specified.']);
