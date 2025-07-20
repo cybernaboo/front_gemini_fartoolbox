@@ -7,6 +7,11 @@ import {
   serviceAction
 } from './services.js';
 
+let apiport;
+let platformList = [];
+let defaultPlatform = "";
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const tabsContainer = document.querySelector(".tabs");
   const serviceTable = document.querySelector("table");
@@ -30,31 +35,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  function initialize() {
-    console.log("Populating platform dropdown...");
-    const platform = document.querySelector(".platform");
-    if (platform) {
-      fetch("parameters.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const platforms = data.Platforms.Platform || [];
-          const defaultPlatform = data.Platforms["Default platform"] || "";
-
-          platforms.forEach((plat) => {
-            const option = document.createElement("option");
-            option.value = plat;
-            option.textContent = plat;
-            platform.appendChild(option);
-          });
-
-          // Set default platform
-          if (defaultPlatform) {
-            platform.value = defaultPlatform;
-          }
-        })
-        .catch((error) => console.error("Error loading parameters:", error));
+  async function fetchParameters() {
+    try {
+      const response = await fetch('parameters.json');
+      const data = await response.json();
+      apiport = data.Port;
+      platformList = data.Platforms.Platform || [];
+      defaultPlatform = data.Platforms["Default platform"] || "";
+    } catch (error) {
+      console.error("Error fetching parameters:", error);
     }
   }
+
+  function populateDropdown() {
+    // feed dataflowLogExtractPlatform & servicePlatform dropdowns
+    const servicePlatformDropdown = document.querySelector("#servicePlatform");
+    const dataflowLogExtractPlatformDropdown = document.querySelector("#dataflowLogExtractPlatform");
+    dataflowLogExtractPlatformDropdown.innerHTML = ""; // Clear existing options
+    servicePlatformDropdown.innerHTML = ""; // Clear existing options
+    //    if (!servicePlatformDropdown || !dataflowLogExtractPlatformDropdown) {
+    platformList.forEach((platform) => {
+      const option = document.createElement("option");
+      option.value = platform;
+      option.textContent = platform;
+      if (platform === defaultPlatform) {
+        option.selected = true; // Set default platform as selected
+      }
+      servicePlatformDropdown.appendChild(option);
+      const option2 = option.cloneNode(true);
+      if (option.selected)
+        option2.selected = true;
+      dataflowLogExtractPlatformDropdown.appendChild(option2);
+    });
+    //    }
+  }
+
+  function initialize() {
+    fetchParameters().then(() => {
+      populateDropdown();
+    })
+  };
 
   function AddListeners() {
     // Gérer les actions de masse
@@ -108,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
   AddListeners();
 
   function handleDataFlowLogExtract() {
+    const dataflowLogExtractPlatform = document.querySelector("#dataflowLogExtractPlatform");
     const dateId = document.querySelector("#dateId").value;
     const inputId = document.querySelector("#inputId").value;
     const dataflow = document.querySelector("#dataflow").value;
@@ -124,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         */
     generateDataflowExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
-    dataFlowLogExtract(dateId, inputId, dataflow, nbLignes)
+    dataFlowLogExtract(dataflowLogExtractPlatform, dateId, inputId, dataflow, nbLignes)
       .then((result) => {
         if (result.status === 'ok') {
           console.log("DataFlow extraction successful:", result.message);

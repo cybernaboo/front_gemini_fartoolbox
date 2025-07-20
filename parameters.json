@@ -1,5 +1,5 @@
 {
-    "Port": 5000,
+    "Port": "5000",
     "Platforms": {
         "Platform": [
             "DEV_ABA",

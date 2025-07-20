@@ -1,6 +1,7 @@
-export async function dataFlowLogExtract(dateId, inputId, dataflow, nbLignes) {
+export async function dataFlowLogExtract(platform, dateId, inputId, dataflow, nbLignes) {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log("DataFlow Extract called with parameters:");
+  console.log(`Platform: ${platform}`);
   console.log(`DateId: ${dateId}`);
   console.log(`InputId: ${inputId}`);
   console.log(`Dataflow: ${dataflow}`);
