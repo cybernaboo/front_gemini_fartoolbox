@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function serviceHandleColumnAction(action) {
-    const serviceList = getServiceDataFromTable();
+    const serviceList = getServiceDataFromTable(action);
     const platform = document.querySelector(".platform").value;
     serviceAction(serviceList, action, platform).then((result) => {
       if (result[0] == 'ok') {
@@ -234,19 +234,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function getServiceDataFromTable() {
+  function getServiceDataFromTable(action) {
     const serviceList = [];
-    const rows = serviceTable.querySelectorAll("tbody tr");
-    // get service name
-    rows.forEach((row) => {
-      const name = row.querySelector("td:first-child").textContent.trim();
-      serviceList.push({ name });
-      // uncheck all checkboxes for the action
-      const actionCheckboxes = row.querySelectorAll(".action-checkbox");
-      actionCheckboxes.forEach((checkbox) => {
-        checkbox.checked = false; // Uncheck the checkbox
-      });
+    const checkboxes = document.querySelectorAll(`.action-checkbox[data-action="${action}"]`);
+    console.log(`Checkboxes for action '${action}':`, checkboxes);
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        const row = checkbox.closest("tr");
+        const serviceName = row.querySelector("td:first-child").textContent.trim();
+        serviceList.push(serviceName);
+      }
     });
+    if (serviceList.length === 0) {
+      console.warn(`No services selected for action '${action}'.`);
+      alert(`No services selected for action '${action}'. Please select at least one service.`);
+    }
     return serviceList;
   }
 
