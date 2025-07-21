@@ -46,6 +46,8 @@ export async function serviceGlobalAction(action, platform) {
 }
 
 export async function serviceAction(serviceList, action, platform) {
+  // setimeout to simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 1000));
   // mock return status from API Fetch
   if (!Array.isArray(serviceList) || serviceList.length === 0) {
     console.log("Service list is empty or not an array.");

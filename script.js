@@ -82,18 +82,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Gérer les actions de masse
     document
       .querySelector(".btn-start")
-      .addEventListener("click", () => serviceHandleColumnAction("start"));
+      .addEventListener("click", () => serviceHandleColumnAction("start", "btn-start"));
     document
       .querySelector(".btn-stop")
-      .addEventListener("click", () => serviceHandleColumnAction("stop"));
+      .addEventListener("click", () => serviceHandleColumnAction("stop", "btn-stop"));
     document
       .querySelector(".btn-restart")
-      .addEventListener("click", () => serviceHandleColumnAction("restart"));
+      .addEventListener("click", () => serviceHandleColumnAction("restart", "btn-restart"));
 
     // Gérer les actions globales
     document
       .querySelector(".btn-get-status")
-      .addEventListener("click", () => serviceHandleGlobalAction("get-status"));
+      .addEventListener("click", () => serviceHandleGlobalAction("get-status", "btn-get-status"));
     document
       .querySelector(".btn-start-all")
       .addEventListener("click", () => serviceHandleGlobalAction("All_Service_Start", "btn-start-all"));
@@ -191,9 +191,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function serviceHandleColumnAction(action) {
+  function serviceHandleColumnAction(action, button) {
     const serviceList = getServiceDataFromTable(action);
     const platform = document.querySelector(".platform").value;
+    const globalActionButton = document.querySelector(`.${button}`);
+    if (!globalActionButton) {
+      alert(`Global action button '${button}' not found.`);
+      return;
+    }
+    globalActionButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange 
     serviceAction(serviceList, action, platform).then((result) => {
       if (result[0] == 'ok') {
         console.log(`Action '${action}' executed successfully on selected services.`);
@@ -201,8 +207,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(`Error executing action '${action}': ${result[1]}`);
         console.error(`Error executing action '${action}':`, result[1]);
       }
+    }).finally(() => {
+      globalActionButton.style.backgroundColor = ""; // Reset to initial color
+      serviceHandleGetStatus(platform);
     });
-    serviceHandleGetStatus(platform);
   }
 
   function serviceHandleGlobalAction(action, button) {
