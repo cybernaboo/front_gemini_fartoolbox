@@ -237,9 +237,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function getServiceDataFromTable() {
     const serviceList = [];
     const rows = serviceTable.querySelectorAll("tbody tr");
+    // get service name
     rows.forEach((row) => {
       const name = row.querySelector("td:first-child").textContent.trim();
       serviceList.push({ name });
+      // uncheck all checkboxes for the action
+      const actionCheckboxes = row.querySelectorAll(".action-checkbox");
+      actionCheckboxes.forEach((checkbox) => {
+        checkbox.checked = false; // Uncheck the checkbox
+      });
     });
     return serviceList;
   }
