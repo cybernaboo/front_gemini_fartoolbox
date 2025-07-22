@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   AddListeners();
 
   function handleDataFlowLogExtract() {
-    const dataflowLogExtractPlatform = document.querySelector("#dataflowLogExtractPlatform");
+    const dataflowLogExtractPlatform = document.querySelector("#dataflowLogExtractPlatform").value;
     const dateId = document.querySelector("#dateId").value;
     const inputId = document.querySelector("#inputId").value;
     const dataflow = document.querySelector("#dataflow").value;
@@ -170,13 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const filename = document.querySelector("#protobufFilename").value;
     const filterType = document.querySelector("#filterType").value;
     const filterValue = document.querySelector("#filterValue").value;
-    const generateProtobufExtractButton = document.querySelector("#generateProtobufButton");
+    const generateProtobufExtractButton = document.querySelector("#generateProtobufButton")
     if (!filename || !filterType || !filterValue) {
       alert("Please fill in all fields for Protobuf extraction.");
       return;
     }
     generateProtobufExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
-    ProtobufExtract().then((result) => {
+    ProtobufExtract(filename, filterType, filterValue).then((result) => {
       if (result.status === 'ok') {
         console.log("Protobuf extraction successful:", result.message);
       } else {
