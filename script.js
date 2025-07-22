@@ -177,16 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     generateProtobufExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
     ProtobufExtract(filename, filterType, filterValue).then((result) => {
-      if (result.status === 'ok') {
-        console.log("Protobuf extraction successful:", result.message);
-      } else {
-        alert(`Error during Protobuf extraction: ${result.message}`);
-        console.error("Error during Protobuf extraction:", result.message);
-      }
-    }).catch((error) => {
-      console.error("Error during Protobuf extraction:", error);
-      alert(`Error during Protobuf extraction: ${error.message}`);
-    }).finally(() => {
       generateProtobufExtractButton.style.backgroundColor = ""; // Reset to initial color
     });
   }
