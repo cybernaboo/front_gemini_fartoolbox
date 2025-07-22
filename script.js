@@ -27,16 +27,21 @@ async function fetchParameters() {
     pushTestDefaultFolder = data.PushTestDefaultFolder || "";
     pushTestDefaultFilename = data.PushTestDefaultFilename || "";
     backendList = data.Backend || [];
+    populateDefaultValues(); // Populate default values for Push Test fields
     populateDropdown(); // Populate dropdowns with fetched parameters
-    console.log("Parameters fetched:", { apiPort, platformList, defaultPlatform, pushTestDefaultFolder, pushTestDefaultFilename, backendList });
   } catch (error) {
     console.error("Error fetching API port:", error);
   }
 }
 
+function populateDefaultValues() {
+  const configFolderElement = document.querySelector("#configFolder");
+  const configFilenameElement = document.querySelector("#configFilename");
+  configFolderElement.value = pushTestDefaultFolder;
+  configFilenameElement.value = pushTestDefaultFilename;
+}
 
 function populateDropdown() {
-  // feed dataflowLogExtractPlatform & servicePlatform dropdowns
   const servicePlatformDropdown = document.querySelector("#servicePlatform");
   const dataflowLogExtractPlatformDropdown = document.querySelector("#dataflowLogExtractPlatform");
   const backendDropdown = document.querySelector("#backend");
@@ -93,8 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function initialize() {
     populateDropdown();
     // Set default values for Push Test fields
-    document.querySelector("#configFolder").value = pushTestDefaultFolder;
-    document.querySelector("#configFilename").value = pushTestDefaultFilename;
+    const configFolderElement = document.querySelector("#configFolder");
+    const configFilenameElement = document.querySelector("#configFilename");
+
+    configFolderElement.value = pushTestDefaultFolder;
+    configFilenameElement.value = pushTestDefaultFilename;
   };
 
   function AddListeners() {
@@ -169,14 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const generateDataflowExtractButton = document.querySelector(
       "#generateDataflowExtractButton"
     );
-    if (!generateDataflowExtractButton)
-      alert("Generate DataFlow Extract button not found.");
-    /*
-        if (!dateId || !inputId || !dataflow || !nbLignes) {
-          alert("Please fill in all fields for DataFlow extraction.");
-          return;
-        }
-        */
     generateDataflowExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
     dataFlowLogExtract(dataflowLogExtractPlatform, dateId, inputId, dataflow, nbLignes)
       .then((result) => {
