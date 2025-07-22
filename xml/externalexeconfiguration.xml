@@ -1,0 +1,24 @@
+<group name = "test0">
+    <file name = "script.js" />
+    <backend = "xxxxx" />
+    <file name = "services.js" />
+    <dateid = "yyy" />
+    <file name = "script.js" />
+    <filename = "" />
+</group>
+<group name = "test">
+    <file name = "script.js" />
+    <backend = "HIGHWAYS" />
+    <file name = "services.js" />
+    <dateid = "20250723" />
+    <file name = "script.js" />
+    <filename = "c:filesdata2.bin" />
+</group>
+<group name = "test3">
+    <file name = "script.js" />
+    <backend = "xxxxx" />
+    <file name = "services.js" />
+    <dateid = "yyy" />
+    <file name = "script.js" />
+    <filename = "" />
+</group>
