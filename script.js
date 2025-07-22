@@ -22,8 +22,8 @@ async function fetchParameters() {
     const response = await fetch('parameters.json');
     const data = await response.json();
     apiPort = data.Port;
-    platformList = data.Platforms.Platform || [];
-    defaultPlatform = data.Platforms["Default platform"] || "";
+    platformList = data.Platforms || [];
+    defaultPlatform = data["Default platform"] || "";
     pushTestDefaultFolder = data.PushTestDefaultFolder || "";
     pushTestDefaultFilename = data.PushTestDefaultFilename || "";
     backendList = data.Backend || [];
