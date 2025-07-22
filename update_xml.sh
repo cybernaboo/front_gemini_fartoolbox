@@ -7,9 +7,11 @@ if [ "$#" -ne 4 ]; then
 fi
 
 XML_FILE="$1"
-BACKEND_VALUE="$2"
-DATEID_VALUE="$3"
-FILENAME_VALUE="$4"
+
+# Escape backslashes in the input values for sed
+BACKEND_VALUE=$(echo "$2" | sed 's/\\/\\\\/g')
+DATEID_VALUE=$(echo "$3" | sed 's/\\/\\\\/g')
+FILENAME_VALUE=$(echo "$4" | sed 's/\\/\\\\/g')
 
 # Use sed to update the values within the specified group
 sed -i.bak "/group name = \"test\"/,/\/group/ {

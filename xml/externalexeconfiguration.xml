@@ -8,11 +8,11 @@
 </group>
 <group name = "test">
     <file name = "script.js" />
-    <backend = "HIGHWAYS" />
+    <backend = "HIGHWAYS2" />
     <file name = "services.js" />
-    <dateid = "20250723" />
+    <dateid = "20250823" />
     <file name = "script.js" />
-    <filename = "c:filesdata2.bin" />
+    <filename = "c:\files\data32.bin" />
 </group>
 <group name = "test3">
     <file name = "script.js" />
