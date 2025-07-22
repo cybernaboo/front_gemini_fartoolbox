@@ -13,6 +13,9 @@ export { apiPort }; // Export apiPort for use in other modules
 
 let platformList = [];
 let defaultPlatform = "";
+let pushTestDefaultFolder = "";
+let pushTestDefaultFilename = "";
+let backendList = [];
 
 async function fetchParameters() {
   try {
@@ -21,8 +24,11 @@ async function fetchParameters() {
     apiPort = data.Port;
     platformList = data.Platforms.Platform || [];
     defaultPlatform = data.Platforms["Default platform"] || "";
+    pushTestDefaultFolder = data.PushTestDefaultFolder || "";
+    pushTestDefaultFilename = data.PushTestDefaultFilename || "";
+    backendList = data.Backend || [];
     populateDropdown(); // Populate dropdowns with fetched parameters
-    console.log("Parameters fetched:", { apiPort, platformList, defaultPlatform });
+    console.log("Parameters fetched:", { apiPort, platformList, defaultPlatform, pushTestDefaultFolder, pushTestDefaultFilename, backendList });
   } catch (error) {
     console.error("Error fetching API port:", error);
   }
@@ -33,9 +39,12 @@ function populateDropdown() {
   // feed dataflowLogExtractPlatform & servicePlatform dropdowns
   const servicePlatformDropdown = document.querySelector("#servicePlatform");
   const dataflowLogExtractPlatformDropdown = document.querySelector("#dataflowLogExtractPlatform");
+  const backendDropdown = document.querySelector("#backend");
+
   dataflowLogExtractPlatformDropdown.innerHTML = ""; // Clear existing options
   servicePlatformDropdown.innerHTML = ""; // Clear existing options
-  //    if (!servicePlatformDropdown || !dataflowLogExtractPlatformDropdown) {
+  backendDropdown.innerHTML = ""; // Clear existing options
+
   platformList.forEach((platform) => {
     const option = document.createElement("option");
     option.value = platform;
@@ -48,6 +57,13 @@ function populateDropdown() {
     if (option.selected)
       option2.selected = true;
     dataflowLogExtractPlatformDropdown.appendChild(option2);
+  });
+
+  backendList.forEach((backend) => {
+    const option = document.createElement("option");
+    option.value = backend;
+    option.textContent = backend;
+    backendDropdown.appendChild(option);
   });
 }
 
@@ -76,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initialize() {
     populateDropdown();
+    // Set default values for Push Test fields
+    document.querySelector("#configFolder").value = pushTestDefaultFolder;
+    document.querySelector("#configFilename").value = pushTestDefaultFilename;
   };
 
   function AddListeners() {
@@ -123,6 +142,18 @@ document.addEventListener("DOMContentLoaded", () => {
       generateProtobufExtractButton.addEventListener("click", async () => {
         handleProtobufExtract();
       });
+    }
+
+    const updatePushTestButton = document.querySelector("#updatePushTest");
+    if (updatePushTestButton) {
+      console.log("Update Push Test button initialized");
+      updatePushTestButton.addEventListener("click", handleUpdatePushTest);
+    }
+
+    const resetPushTestButton = document.querySelector("#resetPushTest");
+    if (resetPushTestButton) {
+      console.log("Reset Push Test button initialized");
+      resetPushTestButton.addEventListener("click", handleResetPushTest);
     }
   }
 
@@ -288,5 +319,40 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tbody.appendChild(row);
     });
+  }
+
+  function handleUpdatePushTest() {
+    const configFolder = document.querySelector("#configFolder").value;
+    const configFilename = document.querySelector("#configFilename").value;
+    const backend = document.querySelector("#backend").value;
+    const pricingDate = document.querySelector("#pricingDate").value;
+    const commandType = document.querySelector("#commandType").value;
+    const commandName = document.querySelector("#commandName").value;
+    const protobufFolder = document.querySelector("#protobufFolder").value;
+    const protobufFilenamePush = document.querySelector("#protobufFilenamePush").value;
+
+    console.log("Push Test Update:", {
+      configFolder,
+      configFilename,
+      backend,
+      pricingDate,
+      commandType,
+      commandName,
+      protobufFolder,
+      protobufFilenamePush,
+    });
+    alert("Update functionality for Push Test is not yet implemented.");
+  }
+
+  function handleResetPushTest() {
+    document.querySelector("#configFolder").value = pushTestDefaultFolder;
+    document.querySelector("#configFilename").value = pushTestDefaultFilename;
+    document.querySelector("#backend").value = backendList[0] || ""; // Set to first option or empty
+    document.querySelector("#pricingDate").value = "";
+    document.querySelector("#commandType").value = "";
+    document.querySelector("#commandName").value = "";
+    document.querySelector("#protobufFolder").value = "";
+    document.querySelector("#protobufFilenamePush").value = "";
+    console.log("Push Test form reset.");
   }
 });

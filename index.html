@@ -22,6 +22,7 @@
           DataFlow Log
         </button>
         <button class="tab-link" data-tab="protobuf">Protobuf Reducer</button>
+        <button class="tab-link" data-tab="pushTest">Push Test</button>
       </div>
 
       <div id="services" class="tab-content active">
@@ -117,6 +118,50 @@
             <input type="text" id="filterValue" name="filterValue" />
           </div>
           <button class="btn" id="generateProtobufButton">Generate</button>
+        </div>
+      </div>
+
+      <div id="pushTest" class="tab-content">
+        <h2>Push Test</h2>
+        <div class="search-form">
+          <div class="form-group">
+            <label for="configFolder">Configuration folder:</label>
+            <input type="text" id="configFolder" name="configFolder" />
+          </div>
+          <div class="form-group">
+            <label for="configFilename">Configuration filename:</label>
+            <input type="text" id="configFilename" name="configFilename" />
+          </div>
+          <div class="form-group">
+            <label for="backend">Backend:</label>
+            <select id="backend" name="backend"></select>
+          </div>
+          <div class="form-group">
+            <label for="pricingDate">Pricing Date:</label>
+            <input type="text" id="pricingDate" name="pricingDate" />
+          </div>
+          <div class="form-group">
+            <label for="commandType">Command Type:</label>
+            <input type="text" id="commandType" name="commandType" />
+          </div>
+          <div class="form-group">
+            <label for="commandName">Command Name:</label>
+            <input type="text" id="commandName" name="commandName" />
+          </div>
+          <div class="form-group">
+            <label for="protobufFolder">Protobuf Folder:</label>
+            <input type="text" id="protobufFolder" name="protobufFolder" />
+          </div>
+          <div class="form-group">
+            <label for="protobufFilenamePush">Protobuf Filename:</label>
+            <input
+              type="text"
+              id="protobufFilenamePush"
+              name="protobufFilenamePush"
+            />
+          </div>
+          <button class="btn" id="updatePushTest">Update</button>
+          <button class="btn" id="resetPushTest">Reset</button>
         </div>
       </div>
     </div>

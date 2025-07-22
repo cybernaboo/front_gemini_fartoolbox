@@ -1,11 +1,16 @@
 {
     "Port": "5000",
-    "Platforms": {
-        "Platform": [
-            "DEV_ABA",
-            "DEV_NAI",
-            "DEV_ASE"
-        ],
-        "Default platform": "DEV_NAI"
-    }
+    "Platforms": [
+        "DEV_ABA",
+        "DEV_NAI",
+        "DEV_ASE"
+    ],
+    "Default platform": "DEV_NAI",
+    "PushTestDefaultFolder": "C:\\Homeware\\Github\\Farexo\\",
+    "PushTestDefaultFilename": "ExternalExeCallConfiguration.xml",
+    "Backend": [
+        "HIGHWAY",
+        "RISKONE",
+        "BACARDI"
+    ]
 }
