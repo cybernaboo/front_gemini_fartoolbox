@@ -4,7 +4,9 @@ import {
   ProtobufExtract,
   getServiceList,
   serviceGlobalAction,
-  serviceAction
+  serviceAction,
+  PushTestSetup,
+  PushTestReset
 } from './services.js';
 
 let apiPort;
@@ -343,18 +345,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const commandName = document.querySelector("#commandName").value;
     const protobufFolder = document.querySelector("#protobufFolder").value;
     const protobufFilenamePush = document.querySelector("#protobufFilenamePush").value;
-
-    console.log("Push Test Update:", {
-      configFolder,
-      configFilename,
-      backend,
-      pricingDate,
-      commandType,
-      commandName,
-      protobufFolder,
-      protobufFilenamePush,
+    // change button background color to orange
+    const updatePushTestButton = document.querySelector("#updatePushTest");
+    updatePushTestButton.style.backgroundColor = "var(--await-bg-color)"; // Change
+    PushTestSetup(configFolder, configFilename, backend, pricingDate, commandType, commandName, protobufFolder, protobufFilenamePush).then((result) => {
+      console.log("Push Test setup successful:", result.message);
+      alert("Push Test setup successful.");
+    }).finally(() => {
+      updatePushTestButton.style.backgroundColor = ""; // Reset to initial color
     });
-    alert("Update functionality for Push Test is not yet implemented.");
   }
 
   function handleResetPushTest() {
@@ -366,6 +365,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#commandName").value = "";
     document.querySelector("#protobufFolder").value = pushTestDefaultProtobufFolder;
     document.querySelector("#protobufFilenamePush").value = "";
-    console.log("Push Test form reset.");
+    // change button background color to orange
+    const resetPushTestButton = document.querySelector("#resetPushTest");
+    resetPushTestButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
+    PushTestReset(configFolder, configFilename, backend, pricingDate, commandType, commandName, protobufFolder, protobufFilenamePush)
+      .then((result) => {
+        console.log("Push Test reset successful:", result.message);
+        alert("Push Test reset successful.");
+      })
+      .finally(() => {
+        resetPushTestButton.style.backgroundColor = ""; // Reset to initial color
+      }
+      );
   }
-});
+})
