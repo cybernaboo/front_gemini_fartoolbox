@@ -337,12 +337,20 @@ td .status {
     border-radius: 8px;
     background-color: #1a1a3a;
     box-shadow: inset 0 0 10px var(--border-color);
-    align-items: flex-end;
+    align-items: flex-start; /* Align items to the start for better multi-line layout */
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+    flex: 1 1 calc(50% - 10px); /* Two columns, accounting for gap */
+    min-width: 250px; /* Minimum width for each field to prevent squishing */
+}
+
+/* Make config folder and filename take full width */
+.search-form #configFolder,
+.search-form #configFilename {
+    flex: 1 1 100%;
 }
 
 .search-form label {

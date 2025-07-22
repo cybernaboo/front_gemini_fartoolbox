@@ -8,6 +8,7 @@
     "Default platform": "DEV_NAI",
     "PushTestDefaultFolder": "C:\\Homeware\\Github\\Farexo\\",
     "PushTestDefaultFilename": "ExternalExeCallConfiguration.xml",
+    "PushTestDefaultProtobufFolder": "//srvcldfae004.xxxx",
     "Backend": [
         "HIGHWAY",
         "RISKONE",

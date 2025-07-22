@@ -15,6 +15,7 @@ let platformList = [];
 let defaultPlatform = "";
 let pushTestDefaultFolder = "";
 let pushTestDefaultFilename = "";
+let pushTestDefaultProtobufFolder = "";
 let backendList = [];
 
 async function fetchParameters() {
@@ -26,6 +27,7 @@ async function fetchParameters() {
     defaultPlatform = data["Default platform"] || "";
     pushTestDefaultFolder = data.PushTestDefaultFolder || "";
     pushTestDefaultFilename = data.PushTestDefaultFilename || "";
+    pushTestDefaultProtobufFolder = data.PushTestDefaultProtobufFolder || "";
     backendList = data.Backend || [];
     populateDefaultValues(); // Populate default values for Push Test fields
     populateDropdown(); // Populate dropdowns with fetched parameters
@@ -37,8 +39,19 @@ async function fetchParameters() {
 function populateDefaultValues() {
   const configFolderElement = document.querySelector("#configFolder");
   const configFilenameElement = document.querySelector("#configFilename");
+  const protobufFolderElement = document.querySelector("#protobufFolder");
+  const pricingDateElement = document.querySelector("#pricingDate");
+
   configFolderElement.value = pushTestDefaultFolder;
   configFilenameElement.value = pushTestDefaultFilename;
+  protobufFolderElement.value = pushTestDefaultProtobufFolder;
+
+  // Set today's date for pricingDate
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const day = String(today.getDate()).padStart(2, '0');
+  pricingDateElement.value = `${year}-${month}-${day}`;
 }
 
 function populateDropdown() {
@@ -351,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#pricingDate").value = "";
     document.querySelector("#commandType").value = "";
     document.querySelector("#commandName").value = "";
-    document.querySelector("#protobufFolder").value = "";
+    document.querySelector("#protobufFolder").value = pushTestDefaultProtobufFolder;
     document.querySelector("#protobufFilenamePush").value = "";
     console.log("Push Test form reset.");
   }
