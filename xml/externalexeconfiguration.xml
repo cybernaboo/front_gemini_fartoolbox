@@ -1,24 +1,30 @@
 <group name = "test0">
-    <file name = "script.js" />
-    <backend = "xxxxx" />
-    <file name = "services.js" />
-    <dateid = "yyy" />
-    <file name = "script.js" />
-    <filename = "" />
+    <Arg name = "blabla" />
+        <var name ="file name" value = "script.js" />
+        <var name ="backend" value = "xxxxx" />
+        <var name ="file name" value = "services.js" />
+        <var name ="dateid" value = "yyy" />
+        <var name ="file name" value = "script.js" />
+        <var name ="filename" value = "" />
+    </Arg>
 </group>
 <group name = "test">
-    <file name = "script.js" />
-    <backend = "HIGHWAYS2" />
-    <file name = "services.js" />
-    <dateid = "20250823" />
-    <file name = "script.js" />
-    <filename = "c:\files\data32.bin" />
+    <Arg name = "blabla" />
+        <var name ="file name" value = "script.js" />
+        <var name ="backend" value = "HIGHWAYS" />
+        <var name ="file name" value = "services.js" />
+        <var name ="dateid" value = "20250723" />
+        <var name ="file name" value = "script.js" />
+        <var name ="filename" value = "c:\files\data2.bin" />
+    </Arg>
 </group>
 <group name = "test3">
-    <file name = "script.js" />
-    <backend = "xxxxx" />
-    <file name = "services.js" />
-    <dateid = "yyy" />
-    <file name = "script.js" />
-    <filename = "" />
+    <Arg name = "blabla" />
+        <var file name = "script.js" />
+        <var backend = "xxxxx" />
+        <var file name = "services.js" />
+        <var dateid = "yyy" />
+        <var file name = "script.js" />
+        <var filename = "" />
+    </Arg>
 </group>

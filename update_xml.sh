@@ -15,9 +15,9 @@ FILENAME_VALUE=$(echo "$4" | sed 's/\\/\\\\/g')
 
 # Use sed to update the values within the specified group
 sed -i.bak "/group name = \"test\"/,/\/group/ {
-    s|<backend = \".*\" />|<backend = \"${BACKEND_VALUE}\" />|g
-    s|<dateid = \".*\" />|<dateid = \"${DATEID_VALUE}\" />|g
-    s|<filename = \".*\" />|<filename = \"${FILENAME_VALUE}\" />|g
+    s|        <var name =\"backend\" value = \".*\" />|        <var name =\"backend\" value = \"${BACKEND_VALUE}\" />|g
+    s|        <var name =\"dateid\" value = \".*\" />|        <var name =\"dateid\" value = \"${DATEID_VALUE}\" />|g
+    s|        <var name =\"filename\" value = \".*\" />|        <var name =\"filename\" value = \"${FILENAME_VALUE}\" />|g
 }" "$XML_FILE"
 
 echo "XML file '$XML_FILE' updated successfully."
