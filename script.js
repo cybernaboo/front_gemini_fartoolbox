@@ -195,18 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
     generateDataflowExtractButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
     dataFlowLogExtract(dataflowLogExtractPlatform, dateId, inputId, dataflow, nbLignes)
       .then((result) => {
-        if (result.status === 'ok') {
-          console.log("DataFlow extraction successful:", result.message);
-        } else {
-          alert(`Error during DataFlow extraction: ${result.message}`);
-          console.error("Error during DataFlow extraction:", result.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error during DataFlow extraction:", error);
-        alert(`Error during DataFlow extraction: ${error.message}`);
-      })
-      .finally(() => {
+        console.log("DataFlow extraction completed");
+      }).finally(() => {
         generateDataflowExtractButton.style.backgroundColor = ""; // Reset to initial color
       });
   }
