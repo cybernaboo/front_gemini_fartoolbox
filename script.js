@@ -237,12 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     globalActionButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange 
     serviceAction(serviceList, action, platform).then((result) => {
-      if (result[0] == 'ok') {
-        console.log(`Action '${action}' executed successfully on selected services.`);
-      } else {
-        alert(`Error executing action '${action}': ${result[1]}`);
-        console.error(`Error executing action '${action}':`, result[1]);
-      }
+      console.log(`Action '${action}' executed on selected services.`);
     }).finally(() => {
       globalActionButton.style.backgroundColor = ""; // Reset to initial color
       serviceHandleGetStatus(platform);
