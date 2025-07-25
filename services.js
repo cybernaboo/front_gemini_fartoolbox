@@ -62,7 +62,7 @@ export async function serviceAction(serviceList, action, platform) {
   return (['ok', 'Action executed successfully.']); // Simulate successful action response
 }
 
-export async function PushTestSetup(configFolder, configFilename, platform, backend, date, pricingDate, commandType, commandName, protobufFolder, protobufFilenamePush) {
+export async function PushTestSetup(configFolder, configFilename, backend, pricingDate, commandType, commandName, dslFolder, dslFilename, protobufFolder, protobufFilenamePush) {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log("Push Test Setup called with parameters:");
   console.log(`Config Folder: ${configFolder}`);
@@ -71,13 +71,15 @@ export async function PushTestSetup(configFolder, configFilename, platform, back
   console.log(`Pricing Date: ${pricingDate}`);
   console.log(`Command Type: ${commandType}`);
   console.log(`Command Name: ${commandName}`);
+  console.log(`Dslib Folder: ${dslFolder}`);
+  console.log(`Dslib Filename: ${dslFilename}`);
   console.log(`Protobuf Folder: ${protobufFolder}`);
   console.log(`Protobuf Filename Push: ${protobufFilenamePush}`);
   // Simulate a successful setup
   return { status: 'ok', message: 'Push Test setup successful.' };
 }
 
-export async function PushTestReset(configFolder, configFilename, platform, backend, date, pricingDate, commandType, commandName, protobufFolder, protobufFilenamePush) {
+export async function PushTestReset(configFolder, configFilename) {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log("Push Test Reset called with parameters:");
   console.log(`Config Folder: ${configFolder}`);
@@ -86,6 +88,8 @@ export async function PushTestReset(configFolder, configFilename, platform, back
   console.log(`Pricing Date: ${pricingDate}`);
   console.log(`Command Type: ${commandType}`);
   console.log(`Command Name: ${commandName}`);
+  console.log(`Dslib Folder: ${dslFolder}`);
+  console.log(`Dslib Filename: ${dslFilename}`);
   console.log(`Protobuf Folder: ${protobufFolder}`);
   console.log(`Protobuf Filename Push: ${protobufFilenamePush}`);
   // Simulate a successful reset

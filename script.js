@@ -328,12 +328,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const pricingDate = document.querySelector("#pricingDate").value;
     const commandType = document.querySelector("#commandType").value;
     const commandName = document.querySelector("#commandName").value;
+    const dslFolder = document.querySelector("#dslFolder").value;
+    const dslFilename = document.querySelector("#dslFilename").value;
     const protobufFolder = document.querySelector("#protobufFolder").value;
     const protobufFilenamePush = document.querySelector("#protobufFilenamePush").value;
     // change button background color to orange
     const updatePushTestButton = document.querySelector("#updatePushTest");
     updatePushTestButton.style.backgroundColor = "var(--await-bg-color)"; // Change
-    PushTestSetup(configFolder, configFilename, backend, pricingDate, commandType, commandName, protobufFolder, protobufFilenamePush).then((result) => {
+    PushTestSetup(configFolder, configFilename, backend, pricingDate, commandType, commandName, dslFolder, dslFilename, protobufFolder, protobufFilenamePush).then((result) => {
       console.log("Push Test setup successful:", result.message);
       alert("Push Test setup successful.");
     }).finally(() => {
@@ -348,12 +350,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#pricingDate").value = "";
     document.querySelector("#commandType").value = "";
     document.querySelector("#commandName").value = "";
+    document.querySelector("#dslFolder").value = "";
+    document.querySelector("#dslFilename").value = "";
     document.querySelector("#protobufFolder").value = pushTestDefaultProtobufFolder;
     document.querySelector("#protobufFilenamePush").value = "";
     // change button background color to orange
     const resetPushTestButton = document.querySelector("#resetPushTest");
     resetPushTestButton.style.backgroundColor = "var(--await-bg-color)"; // Change to orange
-    PushTestReset(configFolder, configFilename, backend, pricingDate, commandType, commandName, protobufFolder, protobufFilenamePush)
+    PushTestReset(configFolder, configFilename)
       .then((result) => {
         console.log("Push Test reset successful:", result.message);
         alert("Push Test reset successful.");
